@@ -1,21 +1,48 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import React, { Component } from "react";
+import { Dimensions, SafeAreaView, StyleSheet, Text, TextInput, View, Button, Image} from "react-native";
+import LoginPage from "./Components/LoginPage";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+let deviceWidht = Dimensions.get("window").width;
+let deviceHeight = Dimensions.get("window").width;
+
+const Stack = createStackNavigator();
+
+export default class App extends Component {
+  constructor() {
+    super()
+    // fix navigation thingy
+  }
+
+  render() {
+    return (
+      <SafeAreaView style={styles.container}>
+        <NavigationContainer >
+          <Stack.Navigator >
+            <Stack.Screen style={styles.navContainer} name="Hello" component={LoginPage} />
+            <Stack.Screen name="Profile" component={LoginPage} />
+          </Stack.Navigator>
+          
+        </NavigationContainer>
+        
+
+      </SafeAreaView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
   },
+  navContainer: {
+    backgroundColor: "yellow",
+    flex: 1,
+  },
+  
 });
