@@ -82,7 +82,6 @@ class ClassView extends Component {
     return (
       <View style={styles.classViewContainer}>
         <View style={styles.classInfo}>
-          <Text>HI</Text>
           <Text style={styles.className}>{this.props.classname}</Text>
           <Text style={styles.teacher}>{this.props.teacher}</Text>
           <Text style={styles.date}>{this.props.lastUpdated}</Text>
@@ -108,7 +107,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    margin: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 5,
+    marginTop: 5,
     padding: 10,
   },
   classList: {
@@ -123,9 +125,6 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 10,
-  },
-  dude: {
-    color: "blue",
   },
   grade: {
     fontSize: 30,
