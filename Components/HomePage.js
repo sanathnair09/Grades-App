@@ -18,30 +18,35 @@ export default class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      classes: [ // make this into a class/type?
+      classes: [
+        // make this into a class/type?
         {
           teacher: "Bob",
           classname: "Math",
           lastUpdated: "3/29/21",
           grade: "A",
+          period: 1,
         },
         {
           teacher: "John",
           classname: "English",
           lastUpdated: "3/29/21",
           grade: "A-",
+          period: 2,
         },
         {
           teacher: "Jim",
           classname: "History",
           lastUpdated: "3/29/21",
           grade: "C+",
+          period: 3,
         },
         {
           teacher: "Barb",
           classname: "Science",
           lastUpdated: "3/29/21",
           grade: "B+",
+          period: 4,
         },
       ],
     };
@@ -54,6 +59,7 @@ export default class HomePage extends Component {
           <ScrollView>
             {this.state.classes.map((item) => (
               <ClassView
+                key={item.period}
                 grade={item.grade}
                 classname={item.classname}
                 lastUpdated={item.lastUpdated}
@@ -76,11 +82,12 @@ class ClassView extends Component {
     return (
       <View style={styles.classViewContainer}>
         <View style={styles.classInfo}>
+          <Text>HI</Text>
           <Text style={styles.className}>{this.props.classname}</Text>
           <Text style={styles.teacher}>{this.props.teacher}</Text>
           <Text style={styles.date}>{this.props.lastUpdated}</Text>
         </View>
-        <Text>{this.props.grade}</Text>
+        <Text style={styles.grade}>{this.props.grade}</Text>
       </View>
     );
   }
@@ -90,14 +97,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: deviceWidth,
-    backgroundColor: "green",
+    //backgroundColor: "coral",
     alignItems: "center",
     justifyContent: "center",
   },
   classViewContainer: {
     flex: 1,
     //width: deviceWidth,
-    backgroundColor: "blue",
+    backgroundColor: "lightgray",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -116,5 +123,11 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 10,
+  },
+  dude: {
+    color: "blue",
+  },
+  grade: {
+    fontSize: 30,
   },
 });
