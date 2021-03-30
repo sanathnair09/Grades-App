@@ -4,6 +4,7 @@ import { Dimensions, SafeAreaView, StyleSheet, Text, TextInput, View, Button, Im
 import LoginPage from "./Components/LoginPage";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import HomePage from './Components/HomePage';
 
 let deviceWidht = Dimensions.get("window").width;
 let deviceHeight = Dimensions.get("window").width;
@@ -19,13 +20,13 @@ export default class App extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <NavigationContainer >
-          <Stack.Navigator >
-            <Stack.Screen style={styles.navContainer} name="Hello" component={LoginPage} />
-            <Stack.Screen name="Profile" component={LoginPage} />
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Login" component={LoginPage} />
+            <Stack.Screen name="Home" component={HomePage} />
           </Stack.Navigator>
-          
         </NavigationContainer>
+        
         
 
       </SafeAreaView>
@@ -36,13 +37,5 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
   },
-  navContainer: {
-    backgroundColor: "yellow",
-    flex: 1,
-  },
-  
 });

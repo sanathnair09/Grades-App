@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import { Dimensions, SafeAreaView, StyleSheet, Text, TextInput, View, Button, Image } from "react-native";
 
-let deviceWidht = Dimensions.get("window").width;
-let deviceHeight = Dimensions.get("window").width;
+let deviceWidth = Dimensions.get("window").width;
+let deviceHeight = Dimensions.get("window").height;
 
-
-
+console.log("loaded")
 export default class LoginPage extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             login: "Login",
             password: "Password",
         }
+
     }
 
     render() {
@@ -23,7 +23,7 @@ export default class LoginPage extends Component {
                     <View>
                         <TextInput style={styles.password} placeholder={this.state.password} secureTextEntry={true} onChangeText={(text) => this.setState({ login: text })} />
                     </View>
-                    <Button title={"Login"} style={styles.loginBtn} />
+                    <Button title={"Login"} style={styles.loginBtn} onPress={() => this.props.navigation.navigate('Home')} />
                 </View>
             </SafeAreaView>
         );
@@ -33,12 +33,13 @@ export default class LoginPage extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "green",
+        width: deviceWidth,
+        backgroundColor: "lightgray",
         alignItems: "center",
         justifyContent: "center",
     },
     loginContainer: {
-        width: deviceWidht * 0.9,
+        width: deviceWidth * 0.9,
         backgroundColor: "red",
         padding: 10,
     },
@@ -54,6 +55,6 @@ const styles = StyleSheet.create({
     },
     loginBtn: {
         padding: 10,
-        
+
     },
 });
