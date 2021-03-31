@@ -7,7 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 
-let deviceWidht = Dimensions.get("window").width;
+let deviceWidth = Dimensions.get("window").width;
 let deviceHeight = Dimensions.get("window").width;
 
 const Stack = createStackNavigator();
