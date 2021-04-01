@@ -53,7 +53,11 @@ export default class LoginPage extends Component {
             </TouchableOpacity>
           </View>
           <View style={styles.utilityContainer}>
-            <TouchableOpacity onPress={() => Alert.alert("Forgot Password", "Resetting Password")}>
+            <TouchableOpacity
+              onPress={() =>
+                Alert.alert("Forgot Password", "Resetting Password")
+              }
+            >
               <Text style={styles.forgotPsswd}>Forgot Password?</Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -145,6 +149,6 @@ const styles = StyleSheet.create({
   },
   forgotPsswd: {
     color: "blue",
-    textDecorationLine: "underline"
+    textDecorationLine: "underline",
   },
 });
