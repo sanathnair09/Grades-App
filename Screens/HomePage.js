@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   Dimensions,
   SafeAreaView,
@@ -26,28 +26,29 @@ export default class HomePage extends Component {
           classname: "Math",
           lastUpdated: "3/29/21",
           grade: "A",
-          period: 1,
+          id: 1,
         },
         {
           teacher: "John",
           classname: "English",
           lastUpdated: "3/29/21",
           grade: "A-",
-          period: 2,
+          id: 2,
         },
         {
           teacher: "Jim",
           classname: "History",
           lastUpdated: "3/29/21",
           grade: "C+",
-          period: 3,
+          id: 3,
         },
+
         {
           teacher: "Barb",
           classname: "Science",
           lastUpdated: "3/29/21",
           grade: "B+",
-          period: 4,
+          id: 4,
         },
       ],
     };
@@ -59,9 +60,16 @@ export default class HomePage extends Component {
         <View style={styles.classList}>
           <ScrollView>
             {this.state.classes.map((item) => (
-              <TouchableHighlight underlayColor="none" onPress={() => console.log(item.classname)}>
-                <ClassView
-                  key={item.period}
+              <TouchableHighlight
+                key={item.id}
+                underlayColor="none"
+                onPress={
+                  () => console.log(item.classname)
+                  /*this.props.navigation.navigate("Home")*/
+                }
+              >
+                <ClassList
+                  key={item.id}
                   grade={item.grade}
                   classname={item.classname}
                   lastUpdated={item.lastUpdated}
@@ -76,14 +84,14 @@ export default class HomePage extends Component {
   }
 }
 
-class ClassView extends Component {
+class ClassList extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <View style={styles.classViewContainer}>
+      <View style={styles.classListContainer}>
         <View style={styles.classInfo}>
           <Text style={styles.className}>{this.props.classname}</Text>
           <Text style={styles.teacher}>{this.props.teacher}</Text>
@@ -103,7 +111,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  classViewContainer: {
+  classListContainer: {
     flex: 1,
     //width: deviceWidth,
     backgroundColor: "lightgray",

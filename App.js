@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Dimensions, SafeAreaView, StyleSheet } from "react-native";
-import LoginPage from "./Components/LoginPage";
-import HomePage from "./Components/HomePage";
+import LoginPage from "./Screens/LoginPage";
+import HomePage from "./Screens/HomePage";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -9,7 +9,6 @@ let deviceWidth = Dimensions.get("window").width;
 let deviceHeight = Dimensions.get("window").width;
 
 const Stack = createStackNavigator();
-
 export default class App extends Component {
   constructor() {
     super();
@@ -39,5 +38,6 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    
   },
 });
