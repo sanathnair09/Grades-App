@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   login: {
     backgroundColor: "lightgray",
     padding: 10,
-    height: deviceHeight * 0.04,
+    height: deviceHeight * 0.05,
     marginBottom: deviceHeight * 0.01,
     borderRadius: 10,
     shadowOpacity: 0.1,
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "lightgray",
     padding: 10,
-    height: deviceHeight * 0.04,
+    height: deviceHeight * 0.05,
     marginBottom: deviceHeight * 0.01,
     borderRadius: 10,
     shadowOpacity: 0.1,
@@ -126,8 +126,8 @@ const styles = StyleSheet.create({
     },
   },
   viewPsswd: {
-    height: deviceHeight * 0.04,
-    width: deviceHeight * 0.04,
+    height: deviceHeight * 0.05,
+    width: deviceHeight * 0.05,
     marginLeft: 5,
   },
   utilityContainer: {
