@@ -10,6 +10,7 @@ import {
   Image,
   ScrollView,
 } from "react-native";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 let deviceWidth = Dimensions.get("window").width;
 let deviceHeight = Dimensions.get("window").height;
@@ -58,13 +59,15 @@ export default class HomePage extends Component {
         <View style={styles.classList}>
           <ScrollView>
             {this.state.classes.map((item) => (
-              <ClassView
-                key={item.period}
-                grade={item.grade}
-                classname={item.classname}
-                lastUpdated={item.lastUpdated}
-                teacher={item.teacher}
-              />
+              <TouchableHighlight underlayColor="none" onPress={() => console.log(item.classname)}>
+                <ClassView
+                  key={item.period}
+                  grade={item.grade}
+                  classname={item.classname}
+                  lastUpdated={item.lastUpdated}
+                  teacher={item.teacher}
+                />
+              </TouchableHighlight>
             ))}
           </ScrollView>
         </View>
