@@ -27,15 +27,15 @@ export default class LoginPage extends Component {
         <View style={styles.loginContainer}>
           <TextInput
             style={styles.login}
-            placeholder={this.state.login}
+            placeholder={"Email"}
             onChangeText={(text) => this.setState({ login: text })}
           />
           <View>
             <TextInput
               style={styles.password}
-              placeholder={this.state.password}
+              placeholder={"Password"}
               secureTextEntry={true}
-              onChangeText={(text) => this.setState({ login: text })}
+              onChangeText={(text) => this.setState({ password: text })}
             />
           </View>
           <Button
