@@ -8,8 +8,11 @@ import {
   ScrollView,
   Modal,
   Image,
+  Button,
+  TouchableOpacity,
 } from "react-native";
-import {TouchableHighlight } from "react-native-gesture-handler";
+import { TouchableHighlight } from "react-native-gesture-handler";
+import ClassPage from "./ClassPage";
 
 let deviceWidth = Dimensions.get("window").width;
 let deviceHeight = Dimensions.get("window").height;
@@ -79,22 +82,19 @@ export default class HomePage extends Component {
               </TouchableHighlight>
             ))}
           </ScrollView>
-          <Modal
-            visible={this.state.modalVisible}
-            animationType="slide"
-            presentationStyle="pageSheet"
-          >
-            <View style={{ backgroundColor: "coral", flex: 1 }}>
-              <TouchableHighlight
-                onPress={() => this.setModalVisible(!this.state.modalVisible)}
-                underlayColor="none"
-              >
-                <Image
-                  style={styles.backBtn}
-                  source={require("../assets/x_circle.png")}
-                />
-              </TouchableHighlight>
-            </View>
+
+          <Modal visible={this.state.modalVisible} animationType="slide">
+            <SafeAreaView style={{ backgroundColor: "coral", flex: 1 }}>
+              <View style={{ width: deviceWidth * 0.1, marginLeft: deviceWidth * 0.05, }}>
+                <TouchableHighlight
+                  onPress={() => this.setModalVisible(!this.state.modalVisible)}
+                  underlayColor="none"
+                >
+                  <Text style={styles.backBtnTxt}>Back</Text>
+                </TouchableHighlight>
+              </View>
+              <ClassPage/>
+            </SafeAreaView>
           </Modal>
         </View>
       </SafeAreaView>
@@ -178,8 +178,8 @@ const styles = StyleSheet.create({
   gradeTxt: {
     fontSize: deviceHeight * 0.02,
   },
-  backBtn: {
-    alignSelf: "center",
-    marginTop: deviceHeight * 0.01,
+  backBtnTxt: {
+    fontSize: deviceHeight * 0.02,
+    color: "black",
   },
 });
