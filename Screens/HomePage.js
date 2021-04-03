@@ -7,11 +7,9 @@ import {
   View,
   ScrollView,
   Modal,
-  Image,
   Button,
-  TouchableOpacity,
+  TouchableHighlight
 } from "react-native";
-import { TouchableHighlight } from "react-native-gesture-handler";
 import ClassPage from "./ClassPage";
 
 let deviceWidth = Dimensions.get("window").width;
@@ -89,9 +87,11 @@ export default class HomePage extends Component {
                 <TouchableHighlight
                   onPress={() => this.setModalVisible(!this.state.modalVisible)}
                   underlayColor="none"
+                  style={{ backgroundColor: "blue"}}
                 >
                   <Text style={styles.backBtnTxt}>Back</Text>
                 </TouchableHighlight>
+              
               </View>
               <ClassPage/>
             </SafeAreaView>
