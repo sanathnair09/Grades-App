@@ -1,16 +1,15 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import {
   Dimensions,
   SafeAreaView,
   StyleSheet,
   Text,
-  TextInput,
   View,
-  Button,
-  Image,
   ScrollView,
+  Modal,
+  Image,
 } from "react-native";
-import { TouchableHighlight } from "react-native-gesture-handler";
+import {TouchableHighlight } from "react-native-gesture-handler";
 
 let deviceWidth = Dimensions.get("window").width;
 let deviceHeight = Dimensions.get("window").height;
@@ -19,6 +18,7 @@ export default class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      modalVisible: false,
       classes: [
         // make this into a class/type?
         {
@@ -54,6 +54,10 @@ export default class HomePage extends Component {
     };
   }
 
+  setModalVisible = (visible) => {
+    this.setState({ modalVisible: visible });
+  };
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -63,10 +67,7 @@ export default class HomePage extends Component {
               <TouchableHighlight
                 key={item.id}
                 underlayColor="none"
-                onPress={
-                  () => console.log(item.classname)
-                  /*this.props.navigation.navigate("Home")*/
-                }
+                onPress={() => this.setModalVisible(!this.state.modalVisible)}
               >
                 <ClassList
                   key={item.id}
@@ -78,6 +79,23 @@ export default class HomePage extends Component {
               </TouchableHighlight>
             ))}
           </ScrollView>
+          <Modal
+            visible={this.state.modalVisible}
+            animationType="slide"
+            presentationStyle="pageSheet"
+          >
+            <View style={{ backgroundColor: "coral", flex: 1 }}>
+              <TouchableHighlight
+                onPress={() => this.setModalVisible(!this.state.modalVisible)}
+                underlayColor="none"
+              >
+                <Image
+                  style={styles.backBtn}
+                  source={require("../assets/x_circle.png")}
+                />
+              </TouchableHighlight>
+            </View>
+          </Modal>
         </View>
       </SafeAreaView>
     );
@@ -94,10 +112,17 @@ class ClassList extends Component {
       <View style={styles.classListContainer}>
         <View style={styles.classInfo}>
           <Text style={styles.className}>{this.props.classname}</Text>
-          <Text style={styles.teacher}>{this.props.teacher}</Text>
-          <Text style={styles.date}>{this.props.lastUpdated}</Text>
+          <Text style={styles.teacher}>
+            {this.props.teacher + " - Room 302"}
+          </Text>
+          <Text style={styles.date}>
+            {"Last Updated: " + this.props.lastUpdated}
+          </Text>
         </View>
-        <Text style={styles.grade}>{this.props.grade}</Text>
+        <View style={styles.gradeContainer}>
+          <Text style={styles.grade}>{this.props.grade}</Text>
+          <Text style={styles.gradeTxt}>100%</Text>
+        </View>
       </View>
     );
   }
@@ -113,7 +138,7 @@ const styles = StyleSheet.create({
   },
   classListContainer: {
     flex: 1,
-    //width: deviceWidth,
+    height: deviceHeight * 0.1,
     backgroundColor: "lightgray",
     flexDirection: "row",
     alignItems: "center",
@@ -122,22 +147,39 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginBottom: 5,
     marginTop: 5,
-    padding: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
   },
   classList: {
     flex: 1,
     width: deviceWidth,
   },
   className: {
-    fontSize: 30,
+    //flex: 1,
+    fontSize: deviceHeight * 0.03,
   },
   teacher: {
-    fontSize: 20,
+    fontSize: deviceHeight * 0.02,
   },
   date: {
-    fontSize: 10,
+    fontSize: deviceHeight * 0.015,
+  },
+  gradeContainer: {
+    width: deviceWidth * 0.2,
+    height: deviceHeight * 0.1,
+    backgroundColor: "lightblue",
+    alignItems: "center",
+    justifyContent: "center",
   },
   grade: {
-    fontSize: 30,
+    fontSize: deviceHeight * 0.03,
+  },
+  gradeTxt: {
+    fontSize: deviceHeight * 0.02,
+  },
+  backBtn: {
+    alignSelf: "center",
+    marginTop: deviceHeight * 0.01,
   },
 });

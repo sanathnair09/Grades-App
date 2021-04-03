@@ -6,11 +6,10 @@ import {
   Text,
   TextInput,
   View,
-  Button,
   Image,
   TouchableOpacity,
-  Switch,
   Alert,
+  KeyboardAvoidingView,
 } from "react-native";
 let deviceWidth = Dimensions.get("window").width;
 let deviceHeight = Dimensions.get("window").height;
@@ -27,12 +26,13 @@ export default class LoginPage extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.loginContainer}>
+        <KeyboardAvoidingView style={styles.loginContainer}>
           <Text style={styles.loginTxt}>Login</Text>
           <Text style={styles.placeholderTxt}>Email</Text>
           <TextInput
             style={styles.login}
             onChangeText={(text) => this.setState({ login: text })}
+            keyboardType="email-address"
           />
           <Text style={styles.placeholderTxt}>Password</Text>
           <View style={styles.passwordContainer}>
@@ -67,7 +67,7 @@ export default class LoginPage extends Component {
               <Text style={styles.loginBtnTxt}>Login</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     );
   }
@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
   loginContainer: {
     flex: 1,
     width: deviceWidth * 0.9,
-    padding: 10,
     justifyContent: "center",
   },
   loginTxt: {
@@ -128,7 +127,7 @@ const styles = StyleSheet.create({
   viewPsswd: {
     height: deviceHeight * 0.05,
     width: deviceHeight * 0.05,
-    marginLeft: 5,
+    marginLeft: deviceWidth * 0.01,
   },
   utilityContainer: {
     flexDirection: "row",
