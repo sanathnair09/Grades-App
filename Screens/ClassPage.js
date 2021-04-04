@@ -5,18 +5,22 @@ let deviceWidth = Dimensions.get("window").width;
 let deviceHeight = Dimensions.get("window").height;
 
 export default class ClassPage extends Component {
-  state = {
-    categories: ["Assignment", "Assesments", "Projects"],
-  };
-
   constructor(props) {
     super(props);
+    this.state = {
+      categories: props.categories,
+      assesement: props.assesement,
+      assignment: props.assignment,
+      projects: props.projcets,
+    };
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Class page</Text>
+        {this.state.categories.map((item) => (
+          <Text>{item}</Text>
+        ))}
       </View>
     );
   }

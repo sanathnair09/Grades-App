@@ -8,7 +8,7 @@ import {
   ScrollView,
   Modal,
   Button,
-  TouchableHighlight
+  TouchableHighlight,
 } from "react-native";
 import ClassPage from "./ClassPage";
 
@@ -83,17 +83,44 @@ export default class HomePage extends Component {
 
           <Modal visible={this.state.modalVisible} animationType="slide">
             <SafeAreaView style={{ backgroundColor: "coral", flex: 1 }}>
-              <View style={{ width: deviceWidth * 0.1, marginLeft: deviceWidth * 0.05, }}>
+              <View
+                style={{
+                  width: deviceWidth * 0.1,
+                  marginLeft: deviceWidth * 0.05,
+                }}
+              >
                 <TouchableHighlight
                   onPress={() => this.setModalVisible(!this.state.modalVisible)}
                   underlayColor="none"
-                  style={{ backgroundColor: "blue"}}
                 >
                   <Text style={styles.backBtnTxt}>Back</Text>
                 </TouchableHighlight>
-              
               </View>
-              <ClassPage/>
+              <ClassPage
+                categories={["Assignment", "Assesments", "Projects"]}
+                assesement={[
+                  {
+                    title: "Ch 14 Quiz",
+                    grade: "98.7",
+                    dateCompleted: "3/3/21",
+                  },
+                  {
+                    title: "Ch 15 Quiz",
+                    grade: "90.0",
+                    dateCompleted: "3/10/21",
+                  },
+                  {
+                    title: "Ch 16 Quiz",
+                    grade: "100.0",
+                    dateCompleted: "3/17/21",
+                  },
+                  {
+                    title: "Ch 17 Quiz",
+                    grade: "85.9",
+                    dateCompleted: "3/24/21",
+                  },
+                ]}
+              />
             </SafeAreaView>
           </Modal>
         </View>
@@ -101,7 +128,6 @@ export default class HomePage extends Component {
     );
   }
 }
-
 class ClassList extends Component {
   constructor(props) {
     super(props);
