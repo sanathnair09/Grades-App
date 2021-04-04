@@ -158,7 +158,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: deviceWidth,
-    //backgroundColor: "coral",
     alignItems: "center",
     justifyContent: "center",
   },
