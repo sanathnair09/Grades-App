@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Dimensions, SafeAreaView, StyleSheet } from "react-native";
+import { Dimensions, SafeAreaView, StatusBar, StyleSheet } from "react-native";
 import LoginPage from "./Screens/LoginPage";
 import HomePage from "./Screens/HomePage";
 import { NavigationContainer } from "@react-navigation/native";
@@ -15,6 +15,7 @@ export default class App extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="dark-content" />
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen

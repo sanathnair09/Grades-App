@@ -5,13 +5,12 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  Button,
   TouchableHighlight,
   FlatList,
 } from "react-native";
 import ClassPage from "./ClassPage";
 import Modal from "react-native-modal";
+import { Picker } from "@react-native-picker/picker";
 
 let deviceWidth = Dimensions.get("window").width;
 let deviceHeight = Dimensions.get("window").height;
@@ -22,7 +21,6 @@ export default class HomePage extends Component {
     this.state = {
       modalVisible: false,
       classes: [
-        // make this into a class/type?
         {
           teacher: "Bob",
           classname: "Math",
@@ -62,12 +60,10 @@ export default class HomePage extends Component {
 
   renderItem = ({ item }) => (
     <TouchableHighlight
-      key={item.id}
       underlayColor="none"
       onPress={() => this.setModalVisible()}
     >
       <ClassList
-        key={item.id}
         grade={item.grade}
         classname={item.classname}
         lastUpdated={item.lastUpdated}
@@ -79,79 +75,63 @@ export default class HomePage extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.classList}>
-          <FlatList
-            data={this.state.classes}
-            render={(item) => this.renderItem(item)}
-          />
-          {/* <ScrollView>
-            {this.state.classes.map((item) => (
+        <FlatList
+          data={this.state.classes}
+          renderItem={this.renderItem}
+          extraData={this.state} //idk if i need this
+          keyExtractor={(item) => item.id.toString()}
+          style={styles.classList}
+          ListHeaderComponent={<HeaderComponent />}
+        />
+        <Modal
+          isVisible={this.state.modalVisible}
+          swipeDirection={["down"]}
+          onSwipeComplete={this.setModalVisible}
+          style={{ margin: 0 }}
+          propagateSwipe={true}
+          animationInTiming={500}
+        >
+          <SafeAreaView style={{ backgroundColor: "coral", flex: 1 }}>
+            <View
+              style={{
+                width: deviceWidth * 0.1,
+                marginLeft: deviceWidth * 0.05,
+              }}
+            >
               <TouchableHighlight
-                key={item.id}
-                underlayColor="none"
                 onPress={() => this.setModalVisible()}
+                underlayColor="none"
               >
-                <ClassList
-                  key={item.id}
-                  grade={item.grade}
-                  classname={item.classname}
-                  lastUpdated={item.lastUpdated}
-                  teacher={item.teacher}
-                />
+                <Text style={styles.backBtnTxt}>Back</Text>
               </TouchableHighlight>
-            ))}
-          </ScrollView> */}
-
-          <Modal
-            isVisible={this.state.modalVisible}
-            swipeDirection={["down"]}
-            onSwipeComplete={this.setModalVisible}
-            style={{ margin: 0 }}
-            propagateSwipe={true}
-            animationInTiming={500}
-          >
-            <SafeAreaView style={{ backgroundColor: "coral", flex: 1 }}>
-              <View
-                style={{
-                  width: deviceWidth * 0.1,
-                  marginLeft: deviceWidth * 0.05,
-                }}
-              >
-                <TouchableHighlight
-                  onPress={() => this.setModalVisible()}
-                  underlayColor="none"
-                >
-                  <Text style={styles.backBtnTxt}>Back</Text>
-                </TouchableHighlight>
-              </View>
-              <ClassPage
-                categories={["Assignments", "Assesments", "Projects"]}
-                assesement={[
-                  {
-                    title: "Ch 14 Quiz",
-                    grade: "98.7",
-                    dateCompleted: "3/3/21",
-                  },
-                  {
-                    title: "Ch 15 Quiz",
-                    grade: "90.0",
-                    dateCompleted: "3/10/21",
-                  },
-                  {
-                    title: "Ch 16 Quiz",
-                    grade: "100.0",
-                    dateCompleted: "3/17/21",
-                  },
-                  {
-                    title: "Ch 17 Quiz",
-                    grade: "85.9",
-                    dateCompleted: "3/24/21",
-                  },
-                ]}
-              />
-            </SafeAreaView>
-          </Modal>
-        </View>
+            </View>
+            <ClassPage
+              categories={["Assignments", "Assesments", "Projects"]}
+              assesement={[
+                {
+                  title: "Ch 14 Quiz",
+                  grade: "98.7",
+                  dateCompleted: "3/3/21",
+                },
+                {
+                  title: "Ch 15 Quiz",
+                  grade: "90.0",
+                  dateCompleted: "3/10/21",
+                },
+                {
+                  title: "Ch 16 Quiz",
+                  grade: "100.0",
+                  dateCompleted: "3/17/21",
+                },
+                {
+                  title: "Ch 17 Quiz",
+                  grade: "85.9",
+                  dateCompleted: "3/24/21",
+                },
+              ]}
+            />
+          </SafeAreaView>
+        </Modal>
       </SafeAreaView>
     );
   }
@@ -181,6 +161,30 @@ class ClassList extends Component {
     );
   }
 }
+
+class HeaderComponent extends Component {
+  state={
+    pickerValue: "current"
+  }
+  render() {
+    return (
+      <View>
+        {/* <Picker
+          selectedValue={this.state.pickerValue}
+          onValueChange={(value) => this.setState({ pickerValue: value })}
+          style={{backgroundColor: "red"}}
+        >
+          <Picker.Item label="Current" value="current" />
+          <Picker.Item label="Prior" value="previous" />
+          <Picker.Item label="Future" value="future" />
+        </Picker> */}
+        <Text>{"Selected term: ______"}</Text>
+      </View>
+    );
+    
+  }
+}
+
 
 const styles = StyleSheet.create({
   container: {
