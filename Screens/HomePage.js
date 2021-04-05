@@ -6,11 +6,12 @@ import {
   Text,
   View,
   ScrollView,
-  Modal,
   Button,
   TouchableHighlight,
+  FlatList,
 } from "react-native";
 import ClassPage from "./ClassPage";
+import Modal from "react-native-modal";
 
 let deviceWidth = Dimensions.get("window").width;
 let deviceHeight = Dimensions.get("window").height;
@@ -55,20 +56,40 @@ export default class HomePage extends Component {
     };
   }
 
-  setModalVisible = (visible) => {
-    this.setState({ modalVisible: visible });
+  setModalVisible = () => {
+    this.setState({ modalVisible: !this.state.modalVisible });
   };
+
+  renderItem = ({ item }) => (
+    <TouchableHighlight
+      key={item.id}
+      underlayColor="none"
+      onPress={() => this.setModalVisible()}
+    >
+      <ClassList
+        key={item.id}
+        grade={item.grade}
+        classname={item.classname}
+        lastUpdated={item.lastUpdated}
+        teacher={item.teacher}
+      />
+    </TouchableHighlight>
+  );
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.classList}>
-          <ScrollView>
+          <FlatList
+            data={this.state.classes}
+            render={(item) => this.renderItem(item)}
+          />
+          {/* <ScrollView>
             {this.state.classes.map((item) => (
               <TouchableHighlight
                 key={item.id}
                 underlayColor="none"
-                onPress={() => this.setModalVisible(!this.state.modalVisible)}
+                onPress={() => this.setModalVisible()}
               >
                 <ClassList
                   key={item.id}
@@ -79,9 +100,16 @@ export default class HomePage extends Component {
                 />
               </TouchableHighlight>
             ))}
-          </ScrollView>
+          </ScrollView> */}
 
-          <Modal visible={this.state.modalVisible} animationType="slide">
+          <Modal
+            isVisible={this.state.modalVisible}
+            swipeDirection={["down"]}
+            onSwipeComplete={this.setModalVisible}
+            style={{ margin: 0 }}
+            propagateSwipe={true}
+            animationInTiming={500}
+          >
             <SafeAreaView style={{ backgroundColor: "coral", flex: 1 }}>
               <View
                 style={{
@@ -90,14 +118,14 @@ export default class HomePage extends Component {
                 }}
               >
                 <TouchableHighlight
-                  onPress={() => this.setModalVisible(!this.state.modalVisible)}
+                  onPress={() => this.setModalVisible()}
                   underlayColor="none"
                 >
                   <Text style={styles.backBtnTxt}>Back</Text>
                 </TouchableHighlight>
               </View>
               <ClassPage
-                categories={["Assignment", "Assesments", "Projects"]}
+                categories={["Assignments", "Assesments", "Projects"]}
                 assesement={[
                   {
                     title: "Ch 14 Quiz",
@@ -136,7 +164,7 @@ class ClassList extends Component {
   render() {
     return (
       <View style={styles.classListContainer}>
-        <View style={styles.classInfo}>
+        <View>
           <Text style={styles.className}>{this.props.classname}</Text>
           <Text style={styles.teacher}>
             {this.props.teacher + " - Room 302"}
@@ -175,6 +203,13 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 10,
+    borderRadius: 10,
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
   },
   classList: {
     flex: 1,
@@ -196,6 +231,8 @@ const styles = StyleSheet.create({
     backgroundColor: "lightblue",
     alignItems: "center",
     justifyContent: "center",
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
   },
   grade: {
     fontSize: deviceHeight * 0.03,

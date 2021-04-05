@@ -25,8 +25,8 @@ export default class LoginPage extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
-        <KeyboardAvoidingView style={styles.loginContainer}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <SafeAreaView style={styles.loginContainer}>
           <Text style={styles.loginTxt}>Login</Text>
           <Text style={styles.placeholderTxt}>Email</Text>
           <TextInput
@@ -67,8 +67,8 @@ export default class LoginPage extends Component {
               <Text style={styles.loginBtnTxt}>Login</Text>
             </TouchableOpacity>
           </View>
-        </KeyboardAvoidingView>
-      </SafeAreaView>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   loginContainer: {
-    flex: 1,
     width: deviceWidth * 0.9,
     justifyContent: "center",
   },
@@ -100,11 +99,11 @@ const styles = StyleSheet.create({
     height: deviceHeight * 0.05,
     marginBottom: deviceHeight * 0.01,
     borderRadius: 10,
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.3,
     shadowRadius: 5,
     shadowOffset: {
       width: 0,
-      height: 0,
+      height: 5,
     },
   },
   passwordContainer: {
@@ -117,11 +116,11 @@ const styles = StyleSheet.create({
     height: deviceHeight * 0.05,
     marginBottom: deviceHeight * 0.01,
     borderRadius: 10,
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.3,
     shadowRadius: 5,
     shadowOffset: {
       width: 0,
-      height: 0,
+      height: 5,
     },
   },
   viewPsswd: {
