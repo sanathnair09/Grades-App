@@ -13,7 +13,8 @@ let deviceHeight = Dimensions.get("window").height;
 
 export default class ClassPage extends Component {
   constructor(props) {
-    super(props);
+    super(props); 
+    
     this.state = {
       categories: props.categories,
       assesement: props.assesement,
