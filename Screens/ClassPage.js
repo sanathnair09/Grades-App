@@ -4,12 +4,14 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   TouchableHighlight,
   SafeAreaView,
+  FlatList,
 } from "react-native";
-import { PanGestureHandler } from "react-native-gesture-handler";
 import Modal from "react-native-modal";
+import Graph from "../Components/Graph";
+import ListItem from "../Components/ListItem";
+import IndividualCategory from "../Screens/IndividualCategoryPage";
 
 let deviceWidth = Dimensions.get("window").width;
 let deviceHeight = Dimensions.get("window").height;
@@ -20,8 +22,8 @@ export default class ClassPage extends Component {
     this.state = {
       modalVisible: false,
       categories: props.categories,
-      assesement: props.assesement,
-      assignment: props.assignment,
+      assesement: props.assesements,
+      assignment: props.assignments,
       projects: props.projcets,
     };
   }
@@ -30,20 +32,35 @@ export default class ClassPage extends Component {
     this.setState({ modalVisible: !this.state.modalVisible });
   };
 
+  renderItem = ({ item }) => (
+    <TouchableHighlight
+      onPress={this.setModalVisible}
+      underlayColor="none"
+      key={item.id}
+    >
+      <ListItem
+        title={item.title}
+        subtitle={4 + " " + item.title}
+        count={4}
+        grade={"D-"}
+        gradeNum={"51"}
+      />
+    </TouchableHighlight>
+  );
+
   render() {
     return (
       <View style={styles.container}>
-        {this.state.categories.map((item, index) => (
-          <TouchableHighlight
-            key={index}
-            onPress={this.setModalVisible}
-            underlayColor="none"
-          >
-            <CategoryList category={item} count={4} />
-          </TouchableHighlight>
-        ))}
-        <View style={styles.graph}>
-          <Text>grades graph</Text>
+        <View style={styles.listView}>
+          <FlatList
+            data={this.state.categories}
+            renderItem={this.renderItem}
+            keyExtractor={(item) => item.id.toString()}
+          />
+        </View>
+
+        <View style={{ flex: 1 }}>
+          <Graph />
         </View>
 
         <Modal
@@ -53,50 +70,15 @@ export default class ClassPage extends Component {
           onSwipeComplete={this.setModalVisible}
           style={{ margin: 0 }}
         >
-          <SafeAreaView style={{ backgroundColor: "lightblue", flex: 1 }}>
-            <TouchableHighlight
-              onPress={() => this.setModalVisible()}
-              underlayColor="none"
-            >
-              <Text style={styles.backBtnTxt}>Back</Text>
-            </TouchableHighlight>
-            <AssignmentView />
-          </SafeAreaView>
+            <IndividualCategory />
         </Modal>
       </View>
     );
   }
 }
 
-class CategoryList extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <View style={styles.categoryContainer}>
-        <Text style={styles.categoryText}>{this.props.category}</Text>
-        <Text style={styles.countTxt}>
-          {this.props.count + " " + this.props.category}
-        </Text>
-      </View>
-    );
-  }
-}
 
-class AssignmentView extends Component {
-  constructor(props) {
-    super(props);
-  }
 
-  render() {
-    return (
-      <View>
-        <Text>hello</Text>
-      </View>
-    );
-  }
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -107,23 +89,35 @@ const styles = StyleSheet.create({
   categoryContainer: {
     width: deviceWidth * 0.95,
     height: deviceHeight * 0.1,
-    backgroundColor: "skyblue",
-    padding: deviceHeight * 0.01,
+    backgroundColor: "lightgray",
     marginBottom: deviceHeight * 0.01,
     borderRadius: 10,
-    justifyContent: "center",
+    justifyContent: "space-between",
+    flexDirection: "row",
   },
   categoryText: {
     fontSize: deviceHeight * 0.04,
   },
+  listView: {
+    flex: 1,
+    marginBottom: deviceHeight * 0.01,
+  },
   countTxt: {
     fontSize: deviceHeight * 0.02,
   },
-  graph: {
-    flex: 1,
-    backgroundColor: "lightgray",
-    width: deviceWidth * 0.95,
+
+  gradeContainer: {
+    width: deviceWidth * 0.2,
+    height: deviceHeight * 0.1,
     alignItems: "center",
     justifyContent: "center",
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+  grade: {
+    fontSize: deviceHeight * 0.03,
+  },
+  gradeTxt: {
+    fontSize: deviceHeight * 0.02,
   },
 });

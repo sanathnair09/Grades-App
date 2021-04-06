@@ -3,14 +3,14 @@ import {
   Dimensions,
   SafeAreaView,
   StyleSheet,
-  Text,
-  View,
   TouchableHighlight,
   FlatList,
 } from "react-native";
 import ClassPage from "./ClassPage";
 import Modal from "react-native-modal";
-import { Picker } from "@react-native-picker/picker";
+import ListItem from "../Components/ListItem";
+import CategoryView from "../Components/Categories";
+import { classes } from "../data/TestData";
 
 let deviceWidth = Dimensions.get("window").width;
 let deviceHeight = Dimensions.get("window").height;
@@ -20,37 +20,7 @@ export default class HomePage extends Component {
     super(props);
     this.state = {
       modalVisible: false,
-      classes: [
-        {
-          teacher: "Bob",
-          classname: "Math",
-          lastUpdated: "3/29/21",
-          grade: "A",
-          id: 1,
-        },
-        {
-          teacher: "John",
-          classname: "English",
-          lastUpdated: "3/29/21",
-          grade: "A-",
-          id: 2,
-        },
-        {
-          teacher: "Jim",
-          classname: "History",
-          lastUpdated: "3/29/21",
-          grade: "C+",
-          id: 3,
-        },
-
-        {
-          teacher: "Barb",
-          classname: "Science",
-          lastUpdated: "3/29/21",
-          grade: "B+",
-          id: 4,
-        },
-      ],
+      classes: classes
     };
   }
 
@@ -63,11 +33,19 @@ export default class HomePage extends Component {
       underlayColor="none"
       onPress={() => this.setModalVisible()}
     >
-      <ClassList
+      {/* <ClassList
+        gradeNum={item.gradeNum}
         grade={item.grade}
         classname={item.classname}
         lastUpdated={item.lastUpdated}
         teacher={item.teacher}
+      /> */}
+      <ListItem
+        title={item.classname}
+        subtitle={item.teacher + " - Room 302"}
+        date={"Last Updated: " + item.lastUpdated}
+        grade={item.grade}
+        gradeNum={item.gradeNum}
       />
     </TouchableHighlight>
   );
@@ -81,7 +59,8 @@ export default class HomePage extends Component {
           extraData={this.state} //idk if i need this
           keyExtractor={(item) => item.id.toString()}
           style={styles.classList}
-          ListHeaderComponent={<HeaderComponent />}
+          // ListHeaderComponent={<HeaderComponent />}
+          // ListHeaderComponentStyle={{ margin: deviceHeight * 0.01 }}
         />
         <Modal
           isVisible={this.state.modalVisible}
@@ -91,100 +70,12 @@ export default class HomePage extends Component {
           propagateSwipe={true}
           animationInTiming={500}
         >
-          <SafeAreaView style={{ backgroundColor: "coral", flex: 1 }}>
-            <View
-              style={{
-                width: deviceWidth * 0.1,
-                marginLeft: deviceWidth * 0.05,
-              }}
-            >
-              <TouchableHighlight
-                onPress={() => this.setModalVisible()}
-                underlayColor="none"
-              >
-                <Text style={styles.backBtnTxt}>Back</Text>
-              </TouchableHighlight>
-            </View>
-            <ClassPage
-              categories={["Assignments", "Assesments", "Projects"]}
-              assesement={[
-                {
-                  title: "Ch 14 Quiz",
-                  grade: "98.7",
-                  dateCompleted: "3/3/21",
-                },
-                {
-                  title: "Ch 15 Quiz",
-                  grade: "90.0",
-                  dateCompleted: "3/10/21",
-                },
-                {
-                  title: "Ch 16 Quiz",
-                  grade: "100.0",
-                  dateCompleted: "3/17/21",
-                },
-                {
-                  title: "Ch 17 Quiz",
-                  grade: "85.9",
-                  dateCompleted: "3/24/21",
-                },
-              ]}
-            />
-          </SafeAreaView>
+          <CategoryView />
         </Modal>
       </SafeAreaView>
     );
   }
 }
-class ClassList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <View style={styles.classListContainer}>
-        <View>
-          <Text style={styles.className}>{this.props.classname}</Text>
-          <Text style={styles.teacher}>
-            {this.props.teacher + " - Room 302"}
-          </Text>
-          <Text style={styles.date}>
-            {"Last Updated: " + this.props.lastUpdated}
-          </Text>
-        </View>
-        <View style={styles.gradeContainer}>
-          <Text style={styles.grade}>{this.props.grade}</Text>
-          <Text style={styles.gradeTxt}>100%</Text>
-        </View>
-      </View>
-    );
-  }
-}
-
-class HeaderComponent extends Component {
-  state={
-    pickerValue: "current"
-  }
-  render() {
-    return (
-      <View>
-        {/* <Picker
-          selectedValue={this.state.pickerValue}
-          onValueChange={(value) => this.setState({ pickerValue: value })}
-          style={{backgroundColor: "red"}}
-        >
-          <Picker.Item label="Current" value="current" />
-          <Picker.Item label="Prior" value="previous" />
-          <Picker.Item label="Future" value="future" />
-        </Picker> */}
-        <Text>{"Selected term: ______"}</Text>
-      </View>
-    );
-    
-  }
-}
-
 
 const styles = StyleSheet.create({
   container: {
@@ -232,7 +123,6 @@ const styles = StyleSheet.create({
   gradeContainer: {
     width: deviceWidth * 0.2,
     height: deviceHeight * 0.1,
-    backgroundColor: "lightblue",
     alignItems: "center",
     justifyContent: "center",
     borderTopRightRadius: 10,
