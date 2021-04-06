@@ -20,7 +20,7 @@ export default class HomePage extends Component {
     super(props);
     this.state = {
       modalVisible: false,
-      classes: classes
+      classes: classes,
     };
   }
 
@@ -84,55 +84,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  classListContainer: {
-    flex: 1,
-    height: deviceHeight * 0.1,
-    backgroundColor: "lightgray",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 5,
-    marginTop: 5,
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 10,
-    borderRadius: 10,
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-  },
   classList: {
     flex: 1,
     width: deviceWidth,
-  },
-  className: {
-    //flex: 1,
-    fontSize: deviceHeight * 0.03,
-  },
-  teacher: {
-    fontSize: deviceHeight * 0.02,
-  },
-  date: {
-    fontSize: deviceHeight * 0.015,
-  },
-  gradeContainer: {
-    width: deviceWidth * 0.2,
-    height: deviceHeight * 0.1,
-    alignItems: "center",
-    justifyContent: "center",
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-  },
-  grade: {
-    fontSize: deviceHeight * 0.03,
-  },
-  gradeTxt: {
-    fontSize: deviceHeight * 0.02,
   },
   backBtnTxt: {
     fontSize: deviceHeight * 0.02,

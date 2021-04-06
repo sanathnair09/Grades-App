@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 5,
     },
+    elevation: 5,
   },
   title: {
     fontSize: deviceHeight * 0.03,

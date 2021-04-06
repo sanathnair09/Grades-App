@@ -70,15 +70,14 @@ export default class ClassPage extends Component {
           onSwipeComplete={this.setModalVisible}
           style={{ margin: 0 }}
         >
+          <View style={{ backgroundColor: "lightblue", flex: 1 }}>
             <IndividualCategory />
+          </View>
         </Modal>
       </View>
     );
   }
 }
-
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -86,38 +85,8 @@ const styles = StyleSheet.create({
     width: deviceWidth,
     alignItems: "center",
   },
-  categoryContainer: {
-    width: deviceWidth * 0.95,
-    height: deviceHeight * 0.1,
-    backgroundColor: "lightgray",
-    marginBottom: deviceHeight * 0.01,
-    borderRadius: 10,
-    justifyContent: "space-between",
-    flexDirection: "row",
-  },
-  categoryText: {
-    fontSize: deviceHeight * 0.04,
-  },
   listView: {
     flex: 1,
     marginBottom: deviceHeight * 0.01,
-  },
-  countTxt: {
-    fontSize: deviceHeight * 0.02,
-  },
-
-  gradeContainer: {
-    width: deviceWidth * 0.2,
-    height: deviceHeight * 0.1,
-    alignItems: "center",
-    justifyContent: "center",
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-  },
-  grade: {
-    fontSize: deviceHeight * 0.03,
-  },
-  gradeTxt: {
-    fontSize: deviceHeight * 0.02,
   },
 });

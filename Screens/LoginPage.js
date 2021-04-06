@@ -1,3 +1,4 @@
+import { Header } from "@react-navigation/stack";
 import React, { Component } from "react";
 import {
   Dimensions,
@@ -21,6 +22,7 @@ export default class LoginPage extends Component {
       password: "Password",
       showPassword: false,
     };
+    console.log(Header);
   }
 
   render() {
@@ -105,16 +107,18 @@ const styles = StyleSheet.create({
       width: 0,
       height: 5,
     },
+    elevation: 5,
   },
   passwordContainer: {
     flexDirection: "row",
+    marginBottom: deviceHeight * 0.02,
   },
   password: {
     flex: 1,
     backgroundColor: "lightgray",
     padding: 10,
     height: deviceHeight * 0.05,
-    marginBottom: deviceHeight * 0.01,
+
     borderRadius: 10,
     shadowOpacity: 0.3,
     shadowRadius: 5,
@@ -122,6 +126,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 5,
     },
+    elevation: 5,
   },
   viewPsswd: {
     height: deviceHeight * 0.05,

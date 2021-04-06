@@ -23,7 +23,6 @@ export const classes = [
     gradeNum: "78.7",
     id: 3,
   },
-
   {
     teacher: "Barb",
     classname: "Science",
