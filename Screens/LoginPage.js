@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   Alert,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 let deviceWidth = Dimensions.get("window").width;
 let deviceHeight = Dimensions.get("window").height;
@@ -32,14 +33,14 @@ export default class LoginPage extends Component {
           <Text style={styles.loginTxt}>Login</Text>
           <Text style={styles.placeholderTxt}>Email</Text>
           <TextInput
-            style={styles.login}
+            style={[styles.textInput, styles.login]}
             onChangeText={(text) => this.setState({ login: text })}
             keyboardType="email-address"
           />
           <Text style={styles.placeholderTxt}>Password</Text>
           <View style={styles.passwordContainer}>
             <TextInput
-              style={styles.password}
+              style={[styles.textInput, styles.password]}
               secureTextEntry={!this.state.showPassword}
               onChangeText={(text) => this.setState({ password: text })}
             />
@@ -95,11 +96,10 @@ const styles = StyleSheet.create({
     fontSize: deviceHeight * 0.02,
     marginBottom: deviceHeight * 0.01,
   },
-  login: {
+  textInput: {
     backgroundColor: "lightgray",
     padding: 10,
-    height: deviceHeight * 0.05,
-    marginBottom: deviceHeight * 0.01,
+    height: Platform.OS == "ios" ? deviceHeight * 0.05 : deviceHeight * 0.06,
     borderRadius: 10,
     shadowOpacity: 0.3,
     shadowRadius: 5,
@@ -108,6 +108,9 @@ const styles = StyleSheet.create({
       height: 5,
     },
     elevation: 5,
+  },
+  login: {
+    marginBottom: deviceHeight * 0.01,
   },
   passwordContainer: {
     flexDirection: "row",
@@ -115,18 +118,6 @@ const styles = StyleSheet.create({
   },
   password: {
     flex: 1,
-    backgroundColor: "lightgray",
-    padding: 10,
-    height: deviceHeight * 0.05,
-
-    borderRadius: 10,
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    elevation: 5,
   },
   viewPsswd: {
     height: deviceHeight * 0.05,

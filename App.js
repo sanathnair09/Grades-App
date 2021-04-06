@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import { Platform, SafeAreaView, StatusBar, StyleSheet, Dimensions } from "react-native";
 import LoginPage from "./Screens/LoginPage";
 import HomePage from "./Screens/HomePage";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+
+let deviceHeight = Dimensions.get("window").height;
 
 const Stack = createStackNavigator();
 export default class App extends Component {
@@ -25,7 +27,7 @@ export default class App extends Component {
               name="Login"
               component={LoginPage}
             />
-            <Stack.Screen name="Home" component={HomePage} />
+            <Stack.Screen name="Home" component={HomePage} options={{ headerTitleStyle: { fontSize: deviceHeight * 0.03,}}} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
