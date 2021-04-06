@@ -10,6 +10,7 @@ import Modal from "react-native-modal";
 import ListItem from "../Components/ListItem";
 import CategoryView from "../Components/Categories";
 import { classes } from "../data/TestData";
+import { newClasses } from "../src/dataGatherer";
 
 let deviceWidth = Dimensions.get("window").width;
 let deviceHeight = Dimensions.get("window").height;
@@ -19,7 +20,7 @@ export default class HomePage extends Component {
     super(props);
     this.state = {
       modalVisible: false,
-      classes: classes,
+      classes: newClasses,
     };
   }
 
@@ -40,11 +41,11 @@ export default class HomePage extends Component {
         teacher={item.teacher}
       /> */}
       <ListItem
-        title={item.classname}
-        subtitle={item.teacher + " - Room 302"}
-        date={"Last Updated: " + item.lastUpdated}
-        grade={item.grade}
-        gradeNum={item.gradeNum}
+        title={item["CourseName"]}
+        subtitle={item["TeacherName"] + " - " + item["RoomNumber"]}
+        date={"Last Updated: " + item["LastUpdated"]}
+        grade={item["CurrentMark"]}
+        gradeNum={item["Percent"]}
       />
     </TouchableHighlight>
   );
@@ -56,7 +57,7 @@ export default class HomePage extends Component {
           data={this.state.classes}
           renderItem={this.renderItem}
           extraData={this.state} //idk if i need this
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item) => item["Period"].toString()}
           style={styles.classList}
           // ListHeaderComponent={<HeaderComponent />}
           // ListHeaderComponentStyle={{ margin: deviceHeight * 0.01 }}
