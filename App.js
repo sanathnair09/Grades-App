@@ -27,7 +27,7 @@ export default class App extends Component {
               name="Login"
               component={LoginPage}
             />
-            <Stack.Screen name="Home" component={HomePage} options={{ headerTitleStyle: { fontSize: deviceHeight * 0.03,}}} />
+            <Stack.Screen name="Home" component={HomePage}  />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>

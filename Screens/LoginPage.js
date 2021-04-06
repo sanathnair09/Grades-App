@@ -1,4 +1,3 @@
-import { Header } from "@react-navigation/stack";
 import React, { Component } from "react";
 import {
   Dimensions,
@@ -23,7 +22,6 @@ export default class LoginPage extends Component {
       password: "Password",
       showPassword: false,
     };
-    console.log(Header);
   }
 
   render() {
