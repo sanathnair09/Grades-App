@@ -6,7 +6,6 @@ import {
   TouchableHighlight,
   FlatList,
 } from "react-native";
-import ClassPage from "./ClassPage";
 import Modal from "react-native-modal";
 import ListItem from "../Components/ListItem";
 import CategoryView from "../Components/Categories";
