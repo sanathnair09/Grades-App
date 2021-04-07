@@ -33,7 +33,14 @@ export default class ListItem extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.classListContainer}>
+        <View
+          style={[
+            styles.classListContainer,
+            {
+              display: this.props.grade != "" ? null : "none",
+            },
+          ]}
+        >
           <View>
             <Text style={styles.title}>{this.props.title}</Text>
             <Text
@@ -58,11 +65,19 @@ export default class ListItem extends Component {
               styles.gradeContainer,
               {
                 backgroundColor: this._getColorFromGrade(this.props.gradeNum),
+                display: this.props.grade != null ? null : "none",
               },
             ]}
           >
             <Text style={styles.grade}>{this.props.grade}</Text>
-            <Text style={styles.gradeTxt}>{this.props.gradeNum + "%"}</Text>
+            <Text
+              style={[
+                styles.gradeTxt,
+                { display: this.props.gradeNum != null ? null : "none" },
+              ]}
+            >
+              {this.props.gradeNum + "%"}
+            </Text>
           </View>
         </View>
       </View>

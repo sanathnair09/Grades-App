@@ -10,11 +10,16 @@ import {
 } from "react-native";
 import ListItem from "../Components/ListItem";
 import { mockAssignment } from "../data/TestData";
+import Modal from "react-native-modal";
 
 let deviceWidth = Dimensions.get("window").width;
 let deviceHeight = Dimensions.get("window").height;
 
 export default class IndividualCategory extends Component {
+  state = {
+    modalVisible: false,
+  };
+
   constructor(props) {
     super(props);
   }
@@ -25,9 +30,19 @@ export default class IndividualCategory extends Component {
     </TouchableHighlight>
   );
 
+  setModalVisible = () => {
+    this.setState({ modalVisible: !this.state.modalVisible });
+  };
   render() {
     return (
       <SafeAreaView style={styles.container}>
+        <TouchableHighlight onPress={this.setModalVisible}>
+          <Text
+            style={{ alignSelf: "center", textAlign: "center", fontSize: 50 }}
+          >
+            +
+          </Text>
+        </TouchableHighlight>
         <FlatList
           data={mockAssignment}
           renderItem={this.renderItem}
