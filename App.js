@@ -2,10 +2,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { Component } from "react";
 import {
-  Dimensions, Platform,
+  Platform,
   SafeAreaView,
   StatusBar,
-  StyleSheet
+  StyleSheet,
 } from "react-native";
 import HomePage from "./Screens/HomePage";
 import LoginPage from "./Screens/LoginPage";
@@ -14,7 +14,7 @@ import SetupPage from "./Screens/Setup Screens/SetupPage";
 
 const Stack = createStackNavigator();
 export default class App extends Component {
-  state = {
+  state={
     isSignedUp: true,
   };
   constructor() {
